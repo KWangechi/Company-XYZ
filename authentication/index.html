@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Authentication</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
+
+    <!-- Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
+    />
+
+    <!-- Styles -->
+    <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
+    <style>
+      .error {
+        outline: 1px, solid red;
+      }
+    </style>
+
+    <!-- Scripts -->
+    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+
+  <header>
+    <h2 class="text-center">COMPANY XYZ Authentication</h2>
+  </header>
+  <br />
+  <main>
+    <div class="container">
+      <form action="../employees.html" method="post" class="form" id="myForm">
+        <div class="mb-3">
+          <label for="username" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control form-control-md"
+            id="username"
+            name="username"
+            placeholder="Jane Doe"
+          />
+          <div class="name-error" style="color: red">
+            Please Fill in the Username
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email_address" class="form-label">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email_address"
+            name="email_address"
+            placeholder="name@example.com"
+          />
+          <div class="email-error" style="color: red">
+            Please Fill in the email address
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="department" class="form-label">Deparment</label>
+          <input
+            type="text"
+            class="form-control"
+            id="department"
+            name="department"
+            placeholder="eg. Sales"
+          />
+          <div class="department-error" style="color: red">
+            Please Fill in the Department
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+          />
+          <div class="password-error" style="color: red">
+            Please Fill in the Password
+          </div>
+        </div>
+
+        <br />
+        <div class="mb-3">
+          <button class="btn btn-primary" id="loginButton">Login</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    $(document).ready(function () {
+      //validate input
+      let nameError = false;
+      let emailError = true;
+      let departmentError = true;
+      let passwordError = true;
+
+      $(".name-error").hide();
+      $("#username").keyup(function () {
+        validateName();
+      });
+
+      //validate username
+      function validateName() {
+        var username = $("#username").val();
+        if (username.length == "") {
+          $(".name-error").show();
+          nameError = true;
+          return nameError;
+        } else {
+          $(".name-error").hide();
+          nameError = false;
+          return nameError;
+        }
+      }
+
+      $(".email-error").hide();
+      $("#email_address").keyup(function () {
+        validateEmail();
+      });
+
+      //validate email address
+      function validateEmail() {
+        var email = $("#email_address").val();
+        if (email.length == "") {
+          $(".email-error").show();
+          emailError = true;
+          return emailError;
+        } else {
+          $(".email-error").hide();
+          emailError = false;
+          return emailError;
+        }
+      }
+
+      $(".department-error").hide();
+      $("#department").keyup(function () {
+        validateDepartment();
+      });
+
+      //validate Department
+      function validateDepartment() {
+        var department = $("#department").val();
+        if (department.length == "") {
+          $(".department-error").show();
+          departmentError = true;
+          return departmentError;
+        } else {
+          $(".department-error").hide();
+          departmentError = false;
+          return departmentError;
+        }
+      }
+
+      $(".password-error").hide();
+      $("#password").keyup(function () {
+        validatePassword();
+      });
+
+      //validate password
+      function validatePassword() {
+        var password = $("#password").val();
+        if (password.length == "") {
+          $(".password-error").show();
+          passwordError = true;
+          return passwordError;
+        } else if (password.length > 0 && password.length < 8) {
+          $(".password-error").text(
+            "Your password should be more that 8 characters"
+          );
+          $(".password-error").show();
+          passwordError = true;
+          return passwordError;
+        } else {
+          $(".password-error").hide();
+          passwordError = false;
+          return passwordError;
+        }
+      }
+
+      $("#loginButton").click(event, function () {
+        validateName();
+        validateEmail();
+        validateDepartment();
+        validatePassword();
+
+        if (
+          nameError == false &&
+          emailError == false &&
+          departmentError == false &&
+          passwordError == false
+        ) {
+          window.location = "../employees.html";
+          alert("Login successful!");
+        } else {
+          event.preventDefault();
+          return false;
+        }
+      });
+    });
+  </script>
+</html>

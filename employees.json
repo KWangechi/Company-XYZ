@@ -1,0 +1,76 @@
+[
+    {
+      "id": 1,
+      "name": "Jane Doe",
+      "email_address": "janedoe@gmail.com",
+      "department": "Sales",
+      "password": "qwerty12345"
+    },
+    {
+      "id": 2,
+      "name": "James Miller",
+      "email_address": "jamesmiller34e@gmail.com",
+      "department": "Accounting",
+      "password": "qwerty12345"
+    },
+    {
+      "id": 3,
+      "name": "Richard Leakey",
+      "email_address": "rleakeyol@gmail.com",
+      "department": "Managerial",
+      "password": "qwerty12345"
+    },
+    {
+      "id": 4,
+      "name": "Tomas Delaney",
+      "email_address": "tdelaney98@gmail.com",
+      "department": "Networking",
+      "password": "qwerty12345"
+    },
+    {
+      "id": 5,
+      "name": "Emma Rose",
+      "email_address": "roseemma@gmail.com",
+      "department": "Marketing",
+      "password": "qwerty12345"
+    },
+    {
+      "id": 6,
+      "name": "Linda Barnes",
+      "email_address": "lindabarnes@gmail.com",
+      "department": "Design",
+      "password": "qwerty12345"
+    },
+
+    {
+      "id": 7,
+      "name": "Mortal Kindler",
+      "email_address": "kindlermort76@gmail.com",
+      "department": "Software Development",
+      "password": "qwerty12345"
+    },
+
+    {
+      "id": 8,
+      "name": "Amy Butler",
+      "email_address": "amybutler@gmail.com",
+      "department": "Marketing",
+      "password": "qwerty12345"
+    },
+
+    {
+      "id": 9,
+      "name": "Chelsea McGregor",
+      "email_address": "chelseamcg001@gmail.com",
+      "department": "Sales",
+      "password": "qwerty12345"
+    },
+
+    {
+      "id": 10,
+      "name": "Daniel Mumbasi",
+      "email_address": "dmumbasi@gmail.com",
+      "department": "Accounting",
+      "password": "qwerty12345"
+    }
+]
