@@ -44,7 +44,6 @@
   <br />
   <main>
     <div class="container">
-      <form action="../employees.html" method="post" class="form" id="myForm">
         <div class="mb-3">
           <label for="username" class="form-label">Name</label>
           <input
@@ -102,9 +101,8 @@
 
         <br />
         <div class="mb-3">
-          <button class="btn btn-primary" id="loginButton">Login</button>
+          <a class="btn btn-primary" href="../employees.html" id="loginButton">Login</a>
         </div>
-      </form>
     </div>
   </main>
 
@@ -211,7 +209,7 @@
           departmentError == false &&
           passwordError == false
         ) {
-          window.location = "../employees.html";
+          // window.location.href = "../employees.html";
           alert("Login successful!");
         } else {
           event.preventDefault();
