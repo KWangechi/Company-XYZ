@@ -98,9 +98,9 @@
         </div>
 
         <br />
-        <div class="mb-3">
-          <a class="btn btn-primary" href="../employees.html" id="loginButton">Login</a>
-        </div>
+        
+          <button class="btn btn-primary" id="loginButton">Login</button>
+  
     </div>
   </main>
 
@@ -196,23 +196,23 @@
       }
 
       $("#loginButton").click(event, function () {
-        validateName();
-        validateEmail();
-        validateDepartment();
-        validatePassword();
+        // validateName();
+        // validateEmail();
+        // validateDepartment();
+        // validatePassword();
 
-        if (
-          nameError == false &&
-          emailError == false &&
-          departmentError == false &&
-          passwordError == false
-        ) {
-          // window.location.href = "../employees.html";
-          alert("Login successful!");
-        } else {
+        // if (
+        //   nameError == false &&
+        //   emailError == false &&
+        //   departmentError == false &&
+        //   passwordError == false
+        // ) {
+          window.location.href = "../employees.html";
+          // alert("Login successful!");
+        
           event.preventDefault();
           return false;
-        }
+        
       });
     });
   </script>
