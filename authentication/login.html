@@ -196,23 +196,25 @@
       }
 
       $("#loginButton").click(event, function () {
-        // validateName();
-        // validateEmail();
-        // validateDepartment();
-        // validatePassword();
+        validateName();
+        validateEmail();
+        validateDepartment();
+        validatePassword();
 
-        // if (
-        //   nameError == false &&
-        //   emailError == false &&
-        //   departmentError == false &&
-        //   passwordError == false
-        // ) {
+        if (
+          nameError == false &&
+          emailError == false &&
+          departmentError == false &&
+          passwordError == false
+        ) {
+
           window.location.href = "../employees.html";
           // alert("Login successful!");
-        
+        }
+        else{
           event.preventDefault();
           return false;
-        
+        }
       });
     });
   </script>
