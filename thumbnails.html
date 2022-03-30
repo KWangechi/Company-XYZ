@@ -25,25 +25,153 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
     />
 
+    <style>
+      .actionsPopup {
+        position: absolute;
+        visibility: hidden;
+        margin-top: 40px;
+        width: 50px;
+        height: 80px;
+        left: 512px;
+        transition: ease-in;
+        /* opacity: 0.5; */
+
+      }
+
+      .actionsPopup.card.ul{
+        background-color: black;
+      }
+      .actionsPopup.active {
+        /* position: sticky; */
+        visibility: visible;
+        transition: ease-out;
+        z-index: 10;
+        /* background-color: aquamarine; */
+
+      }
+
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+        padding: 16px;
+        text-align: center;
+        background-color: #f1f1f1;
+        width: 30rem;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-gap: 80px;
+        align-items: stretch;
+      }
+
+    </style>
+
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
-  <br>
+  <br />
   <div class="mx-auto">
-      <a class="btn btn-info mx-auto" href="./employees.html">Back to Employees Page</a>
+    <a class="btn btn-info mx-auto" href="./employees.html"
+      >Back to Employees Page</a
+    >
   </div>
-  
+
   <br />
   <header class="text-center">
-    <h3>Employee Details</h3>
+    <h3>Employee Thumbnails</h3>
   </header>
-  <br />
-  <main>
+  <body>
     <div class="container">
-      <div class="card mx-auto text-center" style="width: 30rem" id="card">
+    <script type="text/javascript">
+      let element;
+      $(document).ready(function () {
+        $.getJSON("./employees.json", function (employees) {
+          var employment_details = "";
+          $.each(employees, function (key, value) {
+            //check if empty
+            if (key == 0) {
+              $("#card").find("#employee_id").text(value.id);
+              $("#card").find("#employee_name").text(value.name);
+              $("#card").find("#employee_department").text(value.department);
+              $("#card").find("#viewActions").text("VIEW ACTIONS");
+            } else {
+              var newData = $("#card").first().clone();
+
+              newData.find(".employee_id").text(value.id);
+              newData.find(".employee_name").text(value.name);
+              newData.find(".employee_department").text(value.department);
+              newData.find("#viewActions").text("VIEW ACTIONS");
+
+              $(".container").append("<br>" + "<br>");
+              $(".container").append(newData);
+
+            }
+          });
+
+          //open a modal for all employee thumbnails
+          $(".container").on("click", "#viewActions", function () {
+            var name = $(this).parents(".card").text();
+            // var department = $(this).parents(".card").text();
+            var actions = $(this).parents(".card").text();
+
+            var department= $(this).parents(".card").find("#employee_department").text();
+
+            // var employee_actions = $(this).parents(".actionsPopup").find("#employee_actions");
+
+            var sales_actions = $(".actionsPopup").find("#salesActions").attr("data-department")
+            var sdev_actions = $("#actions_card").find("#sdevActions").attr("data-department")
+            var marketing_actions = $("#actions_card").find("#marketingActions").attr("data-department")
+
+            // console.log($("#employee_actions"))
+
+            if(sales_actions == department){
+              $("#actions_card").find("#sdevActions").hide();
+              $("#actions_card").find("#marketingActions").hide();
+
+            }
+
+            if(sdev_actions == department){
+              $("#actions_card").find("#salesActions").hide();
+              $("#actions_card").find("#marketingActions").hide();
+
+            }
+
+            if(marketing_actions == department){
+              $("#actions_card").find("#sdevActions").hide();
+              $("#actions_card").find("#salesActions").hide();
+            }
+            // else{
+            //   alert('There is nothing here');
+            //   $("#actions_card").find("#sdevActions").hide();
+            //   $("#actions_card").find("#salesActions").hide();
+            //   $("#actions_card").find("#marketingActions").hide();
+
+            // }
+            // console.log(department);
+            
+            // console.log(sales_actions)
+
+            // console.log(sdev_actions)
+            // console.log(marketing_actions)
+            // console.log(employee_actions);
+
+            $(".actionsPopup").addClass("active");
+          });
+
+          //close the popup Window
+          $("#close-button").click(function () {
+            $(".actionsPopup").removeClass("active");
+          });
+
+        });
+      });
+    </script>
+
+    <!-- Thumbnails -->
+      <div class="card mx-auto text-center" id="card">
         <div class="card-body text-center">
-          <h5 class="card-title">Employee Details</h5>
-          <p class="card-text" hidden>
+          <p class="card-text">
             ID:
             <span class="employee_id" id="employee_id"></span>
           </p>
@@ -58,54 +186,60 @@
             <span class="employee_department" id="employee_department"></span>
           </p>
           <hr />
+          <button class="btn btn-info" id="viewActions">VIEW ACTIONS</button>
+        </div>
+      </div>
+
+    <!-- Actions Popup -->
+    <div class="actionsPopup">
+      <div
+        class="card mx-auto text-center"
+        style="width: 30rem"
+        id="actions_card"
+      >
+        <div class="card-body text-center">
+          <h2 class="card-title">Actions</h2>
+          <hr />
+
+          <!-- Sales -->
+          <div id="employee_actions" >
+            <div id="salesActions" data-department="Sales">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">1. Made a Sale</li>
+                <li class="list-group-item">2. Cancelled an Order</li>
+                <li class="list-group-item">3. Created price tags</li>
+                <li class="list-group-item">4. Processes an Order</li>
+                <li class="list-group-item">5. Sent an email</li>
+              </ul>
+            </div>
+          </div>
+
+            <div id="sdevActions" data-department="Software Development">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">1. Debugged errors in the application</li>
+                <li class="list-group-item">2. Encrypted users passwords</li>
+                <li class="list-group-item">3. Sent an email to the IT manager</li>
+                <li class="list-group-item">4. Created frontend for the designs</li>
+                <li class="list-group-item">5. Version Control</li>
+              </ul>
+            </div>
+          
+          <div id="marketingActions" data-department="Marketing">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">1. Changed their passwords</li>
+              <li class="list-group-item">2. Logged in marketing products</li>
+              <li class="list-group-item">3. Set Up a marketing meeting on the system</li>
+              <li class="list-group-item">4. Registered new and potential clients</li>
+              <li class="list-group-item">5. Created a leave request</li>
+            </ul>
+          </div>
+        </div>
+          <hr />
+          <button class="btn btn-close mx-auto" id="close-button"></button>
         </div>
       </div>
     </div>
-  </main>
-  <script type="text/javascript">
-    let element;
-    
 
-    function deleteButton() {
-      if (confirm("Are you sure you want to delete this field")) {
-        $(this).closest("div").remove();
-    // nextId += 1;
-
-      }
-    }
-    $(document).ready(function () {
-      $.getJSON("./employees.json", function (employees) {
-        var employment_details = "";
-        $.each(employees, function (key, value) {
-          // element = employees[key]
-          // console.log(element)
-          //check if empty
-          if (key == 0) {
-            // $("#card").find("#employee_id").text(value.id);
-            $("#card").find("#employee_name").text(value.name);
-            $("#card").find("#employee_department").text(value.department);
-            // $("#card").find("#edit_button").text("EDIT DETAILS");
-            // $("#card").find("#delete_button").text("DELETE DETAILS");
-          } else {
-            var newData = $(".card").first().clone();
-            // newData.find(".employee_id").text(value.id);
-            newData.find(".employee_name").text(value.name);
-            newData.find(".employee_department").text(value.department);
-            // newData.find("#edit_button").text("EDIT DETAILS");
-            // newData.find("#delete_button").text("DELETE DETAILS");
-
-            // //button clicks
-            // $("#edit_button").on('click',function(){
-            //   console.log(value.id)
-            // })
-            $(".container").append("<br>" + "<br>" + "<br>");
-
-            $(".container").append(newData);
-          }
-        });
-      });
-
-      $("#delete_button").on("click", deleteButton);
-    });
-  </script>
+    </div>
+  </body>
 </html>
